@@ -1,21 +1,16 @@
-import type { ComplaintState } from "@/store/slices/complaintSlice";
+const TRANSIENT_SESSION_KEYS = ["aivoa.complaintState.v1"];
 
-const KEY = "aivoa.complaintState.v1";
+export function clearComplaintSessionPersistence() {
+  if (typeof window === "undefined") {
+    return;
+  }
 
-export function loadComplaintState(): ComplaintState | undefined {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? (JSON.parse(raw) as ComplaintState) : undefined;
-  } catch {
-    return undefined;
+  for (const key of TRANSIENT_SESSION_KEYS) {
+    try {
+      window.localStorage.removeItem(key);
+      window.sessionStorage.removeItem(key);
+    } catch {
+      // Storage cleanup is best-effort and should never block app startup.
+    }
   }
 }
-
-export function saveComplaintState(state: ComplaintState) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-  } catch {
-    // Local persistence should never block the complaint workflow.
-  }
-}
-
