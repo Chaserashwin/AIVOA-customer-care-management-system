@@ -41,8 +41,10 @@ export function CopilotPanel() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages.length, thinking, upload.progress]);
+    window.requestAnimationFrame(() => {
+      listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+    });
+  }, [messages, thinking, upload.progress]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -151,8 +153,8 @@ export function CopilotPanel() {
   }
 
   return (
-    <aside className="flex min-h-[640px] flex-col border-l bg-slate-50/80">
-      <div className="flex items-start justify-between border-b bg-white px-5 py-4">
+    <aside className="flex h-full min-h-0 flex-col overflow-hidden border-t bg-slate-50/80 lg:border-l lg:border-t-0">
+      <div className="shrink-0 flex items-start justify-between border-b bg-white px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Bot className="h-5 w-5" />
@@ -165,7 +167,7 @@ export function CopilotPanel() {
         <div className={cn("mt-1 h-2.5 w-2.5 rounded-full", ai.isStreaming ? "bg-primary" : "bg-emerald-500")} />
       </div>
 
-      <div ref={listRef} className="flex-1 overflow-y-auto px-5 py-4">
+      <div ref={listRef} className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
         <div className="space-y-4">
           {messages.map((message) => (
             <MessageBubble key={message.id} message={message} />
@@ -176,7 +178,7 @@ export function CopilotPanel() {
         </div>
       </div>
 
-      <div className="border-t bg-white px-4 py-3">
+      <div className="shrink-0 border-t bg-white px-4 py-3">
         <PromptSuggestions disabled={ai.isStreaming || upload.isUploading} onSelect={sendMessage} />
         <form onSubmit={handleSubmit} className="mt-3 flex items-end gap-2">
           <input

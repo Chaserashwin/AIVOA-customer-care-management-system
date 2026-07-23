@@ -98,7 +98,7 @@ export function ComplaintFormPanel() {
   }
 
   return (
-    <div className="min-w-0 overflow-y-auto px-5 py-6 md:px-7">
+    <div className="h-full min-h-0 min-w-0 overflow-y-auto px-5 py-6 md:px-7">
       <div className="mb-6 grid gap-3 rounded-lg border bg-slate-50 p-4 sm:grid-cols-[1fr_220px]">
         <div>
           <div className="flex items-center gap-2 text-sm font-semibold">
@@ -246,4 +246,3 @@ function ReadOnlyValue({ label, value, className }: { label: string; value: stri
 function SkeletonLine({ className }: { className?: string }) {
   return <div className={cn("h-10 animate-pulse rounded-md bg-white/80", className)} />;
 }
-

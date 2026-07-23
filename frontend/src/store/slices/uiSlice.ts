@@ -4,7 +4,7 @@ interface Toast {
   id: string;
   title: string;
   description?: string;
-  variant?: "success" | "error" | "info";
+  variant?: "success" | "error" | "info" | "warning";
 }
 
 interface UiState {
@@ -30,4 +30,3 @@ const uiSlice = createSlice({
 
 export const { dismissToast, pushToast } = uiSlice.actions;
 export default uiSlice.reducer;
-

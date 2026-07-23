@@ -22,9 +22,9 @@ export function ComplaintWorkspace() {
   }, [dispatch, highlightedFields.length]);
 
   return (
-    <main className="min-h-screen px-4 py-5 text-slate-950 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-[1480px] flex-col gap-5">
-        <header className="flex flex-col gap-4 border-b bg-white/70 pb-4 backdrop-blur md:flex-row md:items-center md:justify-between">
+    <main className="h-[100dvh] overflow-hidden px-4 py-5 text-slate-950 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-full max-w-[1480px] flex-col gap-5 overflow-hidden">
+        <header className="shrink-0 flex flex-col gap-4 border-b bg-white/70 pb-4 backdrop-blur md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
               <FlaskConical className="h-5 w-5" />
@@ -75,7 +75,7 @@ export function ComplaintWorkspace() {
           </div>
         </header>
 
-        <section className="grid min-h-[calc(100vh-132px)] gap-0 overflow-hidden rounded-lg border bg-white shadow-panel lg:grid-cols-[minmax(0,1.35fr)_minmax(390px,0.9fr)]">
+        <section className="grid min-h-0 flex-1 grid-rows-[minmax(360px,1fr)_minmax(420px,1fr)] gap-0 overflow-hidden rounded-lg border bg-white shadow-panel lg:grid-cols-[minmax(0,1.35fr)_minmax(390px,0.9fr)] lg:grid-rows-1">
           <ComplaintFormPanel />
           <CopilotPanel />
         </section>
@@ -103,4 +103,3 @@ function StatusBadge({ status }: { status: string }) {
   }
   return <Badge variant="warning">Pending Triage</Badge>;
 }
-
