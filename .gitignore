@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+aivoa_demo.db
+var/
+
+# Node
+node_modules/
+dist/
+.vite/
+coverage/
+
+# Environment
+.env
+backend/.env
+frontend/.env
+
+# Local scratch
+tmp/
+
