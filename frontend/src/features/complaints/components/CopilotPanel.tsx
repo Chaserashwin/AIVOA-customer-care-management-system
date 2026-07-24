@@ -153,8 +153,8 @@ export function CopilotPanel() {
   }
 
   return (
-    <aside className="flex h-full min-h-0 flex-col overflow-hidden border-t bg-slate-50/80 lg:border-l lg:border-t-0">
-      <div className="shrink-0 flex items-start justify-between border-b bg-white px-5 py-4">
+    <aside className="flex h-[min(560px,calc(100dvh-1.5rem))] min-h-[420px] min-w-0 flex-col overflow-hidden border-t bg-slate-50/80 md:h-[620px] lg:h-full lg:min-h-0 lg:border-l lg:border-t-0">
+      <div className="shrink-0 flex items-start justify-between gap-3 border-b bg-white px-4 py-3 sm:px-5 sm:py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Bot className="h-5 w-5" />
@@ -167,7 +167,7 @@ export function CopilotPanel() {
         <div className={cn("mt-1 h-2.5 w-2.5 rounded-full", ai.isStreaming ? "bg-primary" : "bg-emerald-500")} />
       </div>
 
-      <div ref={listRef} className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+      <div ref={listRef} className="min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5 sm:py-4">
         <div className="space-y-4">
           {messages.map((message) => (
             <MessageBubble key={message.id} message={message} />
@@ -178,7 +178,7 @@ export function CopilotPanel() {
         </div>
       </div>
 
-      <div className="shrink-0 border-t bg-white px-4 py-3">
+      <div className="shrink-0 border-t bg-white px-3 py-3 sm:px-4">
         <PromptSuggestions disabled={ai.isStreaming || upload.isUploading} onSelect={sendMessage} />
         <form onSubmit={handleSubmit} className="mt-3 flex items-end gap-2">
           <input
@@ -192,22 +192,23 @@ export function CopilotPanel() {
             type="button"
             variant="outline"
             size="icon"
+            className="h-11 w-11 shrink-0 lg:h-9 lg:w-9"
             aria-label="Upload complaint file"
             onClick={() => fileRef.current?.click()}
             disabled={ai.isStreaming || upload.isUploading}
           >
             <Paperclip className="h-4 w-4" />
           </Button>
-          <div className="flex min-h-10 flex-1 items-center rounded-md border border-primary/40 bg-white px-3 focus-within:ring-2 focus-within:ring-primary/15">
+          <div className="flex min-h-11 min-w-0 flex-1 items-center rounded-md border border-primary/40 bg-white px-3 focus-within:ring-2 focus-within:ring-primary/15">
             <input
-              className="h-10 min-w-0 flex-1 border-0 bg-transparent text-sm outline-none"
+              className="h-11 min-w-0 flex-1 border-0 bg-transparent text-sm outline-none"
               placeholder="Type a message or paste a complaint..."
               value={input}
               onChange={(event) => setInput(event.target.value)}
               disabled={ai.isStreaming || upload.isUploading}
             />
           </div>
-          <Button type="submit" size="icon" aria-label="Send message" disabled={!input.trim() || ai.isStreaming || upload.isUploading}>
+          <Button type="submit" size="icon" className="h-11 w-11 shrink-0 lg:h-9 lg:w-9" aria-label="Send message" disabled={!input.trim() || ai.isStreaming || upload.isUploading}>
             {ai.isStreaming ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
           </Button>
         </form>
@@ -230,7 +231,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       ) : null}
       <div
         className={cn(
-          "max-w-[82%] rounded-lg border px-4 py-3 text-sm leading-relaxed shadow-sm",
+          "max-w-[calc(100%-2.5rem)] rounded-lg border px-3 py-2.5 text-sm leading-relaxed shadow-sm sm:max-w-[82%] sm:px-4 sm:py-3",
           isUser ? "border-primary bg-primary text-white" : "border-slate-200 bg-white text-slate-700",
           message.status === "error" && "border-rose-200 bg-rose-50 text-rose-700",
         )}
@@ -254,14 +255,14 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
 function PromptSuggestions({ disabled, onSelect }: { disabled: boolean; onSelect: (value: string) => void }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="grid grid-cols-1 gap-2 min-[430px]:grid-cols-3 sm:flex sm:flex-wrap">
       {prompts.map((prompt, index) => (
         <Button
           key={prompt}
           type="button"
           variant="secondary"
           size="sm"
-          className="max-w-full truncate"
+          className="min-h-11 max-w-full truncate lg:min-h-0"
           disabled={disabled}
           title={prompt}
           onClick={() => onSelect(prompt)}

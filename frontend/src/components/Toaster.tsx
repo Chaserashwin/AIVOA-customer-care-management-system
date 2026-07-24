@@ -23,7 +23,7 @@ export function Toaster() {
   const handleDismiss = useCallback((id: string) => dispatch(dismissToast(id)), [dispatch]);
 
   return (
-    <div className="fixed right-4 top-4 z-50 flex w-[360px] max-w-[calc(100vw-2rem)] flex-col gap-3">
+    <div className="fixed left-3 right-3 top-3 z-50 flex max-w-[calc(100vw-1.5rem)] flex-col gap-3 sm:left-auto sm:right-4 sm:top-4 sm:w-[360px] sm:max-w-[calc(100vw-2rem)]">
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} onDismiss={handleDismiss} />
       ))}

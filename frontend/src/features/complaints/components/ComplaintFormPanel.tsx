@@ -98,8 +98,8 @@ export function ComplaintFormPanel() {
   }
 
   return (
-    <div className="h-full min-h-0 min-w-0 overflow-y-auto px-5 py-6 md:px-7">
-      <div className="mb-6 grid gap-3 rounded-lg border bg-slate-50 p-4 sm:grid-cols-[1fr_220px]">
+    <div className="min-w-0 px-4 py-4 sm:px-5 sm:py-5 md:px-6 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:px-7 lg:py-6">
+      <div className="mb-5 grid gap-3 rounded-lg border bg-slate-50 p-3 sm:grid-cols-[1fr_180px] sm:p-4 lg:mb-6 lg:grid-cols-[1fr_220px]">
         <div>
           <div className="flex items-center gap-2 text-sm font-semibold">
             <Sparkles className="h-4 w-4 text-primary" />
@@ -119,14 +119,14 @@ export function ComplaintFormPanel() {
         </div>
       </div>
 
-      <form className="space-y-7">
+      <form className="space-y-5 lg:space-y-7">
         {sections.map((section) => (
           <section key={section.title}>
             <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-normal text-slate-500">
               <section.icon className="h-4 w-4 text-primary" />
               {section.title}
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
               {section.fields.map((field) => (
                 <FieldControl
                   key={field.key}
@@ -147,7 +147,7 @@ export function ComplaintFormPanel() {
 
         <Button
           type="button"
-          className="h-11 w-full"
+          className="min-h-11 w-full"
           disabled={status === "Committed" || !risk.severity}
           onClick={handleCommit}
         >
@@ -180,7 +180,7 @@ function FieldControl({
   onChange: (value: string) => void;
 }) {
   const commonClass = cn(
-    "w-full rounded-md border border-input bg-white px-3 py-2 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15",
+    "min-h-11 w-full rounded-md border border-input bg-white px-3 py-2 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15",
     highlighted && "field-highlight border-emerald-400 bg-emerald-50",
   );
 
@@ -210,7 +210,7 @@ function RiskAssessmentCard({ riskReady }: { riskReady: boolean }) {
   }
 
   return (
-    <section className="rounded-lg border border-primary/10 bg-primary/5 p-4">
+    <section className="rounded-lg border border-primary/10 bg-primary/5 p-3 sm:p-4">
       <div className="mb-3 flex items-center gap-2 text-sm font-bold text-primary">
         <ShieldAlert className="h-4 w-4" />
         AI copilot risk assessment
@@ -222,7 +222,7 @@ function RiskAssessmentCard({ riskReady }: { riskReady: boolean }) {
           <SkeletonLine className="sm:col-span-2" />
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
           <ReadOnlyValue label="Severity (Suggested)" value={risk.severity} />
           <ReadOnlyValue label="Priority" value={risk.priority} />
           <ReadOnlyValue label="Suggested Next Action" value={risk.suggested_next_action} />

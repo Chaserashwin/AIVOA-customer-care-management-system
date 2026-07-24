@@ -38,6 +38,11 @@ body {
   min-height: 100dvh;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 input,
 textarea,
 button,
